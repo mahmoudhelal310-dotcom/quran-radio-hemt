@@ -33,6 +33,23 @@ body{
     background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
     color:white;
     padding:20px;
+    padding-top:80px; /* علشان الشريط العلوي */
+}
+
+/* الشريط العلوي */
+.top-banner{
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+    background:#f1f8e9;
+    color:#2e7d32;
+    text-align:center;
+    padding:14px 10px;
+    font-size:18px;
+    font-weight:bold;
+    z-index:999;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
 }
 
 .radio-box{
@@ -139,12 +156,16 @@ button:active{
 
 <body>
 
+<!-- الشريط العلوي -->
+<div class="top-banner">
+🌿 هذا العمل صدقة جارية عن روح المرحومة همت — نسألكم الدعاء
+</div>
+
 <div class="radio-box">
     <div class="creator">by Mahmoud Helal</div>
     <div class="radio-icon">📻</div>
     <h1>إذاعة القرآن الكريم</h1>
     <p style="color:#c8e6c9;font-weight:bold;">
-        🌿 صدقة جارية عن روح همت<br>
         نسأل الله أن يجعلها في ميزان حسناتها
     </p>
 
@@ -163,20 +184,6 @@ button:active{
 
 <div id="duaa" class="box"></div>
 <div id="ayah" class="box"></div>
-
-<div style="
-  margin:30px auto;
-  padding:12px;
-  max-width:500px;
-  background:#f1f8e9;
-  border-radius:8px;
-  text-align:center;
-  font-size:18px;
-  color:#2e7d32;
-  font-weight:bold;
-">
-🌿 صدقة جارية عن روح همت — لا تنسوها من صالح دعائكم
-</div>
 
 <script>
 /* تشغيل الإذاعة */
@@ -212,7 +219,7 @@ const duaas = [
 "🤲 اللهم اغفر لها وارحمها",
 "🤲 اللهم اجعل قبرها روضة من رياض الجنة",
 "🤲 اللهم آنس وحشتها ونوّر قبرها",
-"🤲 اللهم اجعل عملها هذا صدقة جارية عنها",
+"🤲 اللهم اجعل هذا العمل صدقة جارية عنها",
 "🤲 اللهم ارفع درجتها في المهديين",
 "🤲 اللهم اجمعنا بها في جنات النعيم"
 ];
