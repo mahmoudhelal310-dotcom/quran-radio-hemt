@@ -81,18 +81,26 @@ button:active{
     background:#16a085;
 }
 
-#ayah{
+.box{
     margin:25px auto;
-    padding:15px;
+    padding:16px;
     max-width:600px;
     text-align:center;
     font-size:18px;
-    background:#f1f8e9;
-    color:#2e7d32;
-    border-radius:10px;
+    border-radius:12px;
     font-weight:bold;
     opacity:0;
     transition: opacity 1.5s ease-in-out;
+}
+
+#duaa{
+    background:#ffffff;
+    color:#2e7d32;
+}
+
+#ayah{
+    background:#f1f8e9;
+    color:#2e7d32;
 }
 
 #fbNotice{
@@ -153,32 +161,8 @@ button:active{
     </div>
 </div>
 
-<div style="
-  margin:30px auto;
-  padding:18px;
-  max-width:600px;
-  background:#ffffff;
-  border-radius:12px;
-  text-align:center;
-  font-size:17px;
-  color:#2e7d32;
-  line-height:1.9;
-">
-🤲 <strong>دعاء للمرحومة همت</strong><br><br>
-
-اللهم اغفر لها وارحمها،  
-وعافِها واعفُ عنها،  
-وأكرم نزلها، ووسع مدخلها،  
-واغسلها بالماء والثلج والبرد،  
-ونقِّها من الخطايا كما يُنقَّى الثوب الأبيض من الدنس،  
-وأبدلها دارًا خيرًا من دارها،  
-وأهلًا خيرًا من أهلها،  
-واجعل قبرها روضة من رياض الجنة،  
-ولا تجعله حفرة من حفر النار.  
-
-<br><br>
-🤍 اللهم اجعل هذا العمل صدقة جارية عنها إلى يوم الدين
-</div>
+<div id="duaa" class="box"></div>
+<div id="ayah" class="box"></div>
 
 <div style="
   margin:30px auto;
@@ -194,9 +178,8 @@ button:active{
 🌿 صدقة جارية عن روح همت — لا تنسوها من صالح دعائكم
 </div>
 
-<div id="ayah"></div>
-
 <script>
+/* تشغيل الإذاعة */
 let playing = false;
 const radio = document.getElementById("radio");
 const btn = document.getElementById("playBtn");
@@ -208,11 +191,8 @@ function togglePlay(){
             radio.src = "https://stream.radiojar.com/8s5u5tpdtwzuv";
         }
         radio.load();
-        radio.play().then(()=>{
-            notice.style.display = "none";
-        }).catch(()=>{
-            notice.style.display = "block";
-        });
+        radio.play().then(()=> notice.style.display="none")
+        .catch(()=> notice.style.display="block");
         btn.innerHTML = "⏸️ إيقاف الإذاعة";
         playing = true;
     }else{
@@ -222,16 +202,34 @@ function togglePlay(){
     }
 }
 
-const copyBtn = document.getElementById("copyBtn");
-const fbLink = document.getElementById("fbLink");
+/* نسخ الرابط */
+document.getElementById("copyBtn").onclick = () => {
+    navigator.clipboard.writeText(document.getElementById("fbLink").href);
+};
 
-copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(fbLink.href).then(() => {
-        copyBtn.innerText = "تم النسخ ✅";
-        setTimeout(() => { copyBtn.innerText = "نسخ الرابط"; }, 2000);
-    });
-});
+/* الأدعية */
+const duaas = [
+"🤲 اللهم اغفر لها وارحمها",
+"🤲 اللهم اجعل قبرها روضة من رياض الجنة",
+"🤲 اللهم آنس وحشتها ونوّر قبرها",
+"🤲 اللهم اجعل عملها هذا صدقة جارية عنها",
+"🤲 اللهم ارفع درجتها في المهديين",
+"🤲 اللهم اجمعنا بها في جنات النعيم"
+];
 
+let d = 0;
+const duaaDiv = document.getElementById("duaa");
+
+function changeDuaa(){
+    duaaDiv.style.opacity = 0;
+    setTimeout(()=>{
+        duaaDiv.innerHTML = duaas[d];
+        duaaDiv.style.opacity = 1;
+        d = (d + 1) % duaas.length;
+    },1500);
+}
+
+/* الآيات */
 const ayat = [
 "﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾",
 "﴿ إِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾",
@@ -240,19 +238,21 @@ const ayat = [
 "﴿ كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ ﴾"
 ];
 
-let currentAyah = 0;
+let a = 0;
 const ayahDiv = document.getElementById("ayah");
 
 function changeAyah(){
     ayahDiv.style.opacity = 0;
     setTimeout(()=>{
-        ayahDiv.innerHTML = "📖 " + ayat[currentAyah];
+        ayahDiv.innerHTML = "📖 " + ayat[a];
         ayahDiv.style.opacity = 1;
-        currentAyah = (currentAyah + 1) % ayat.length;
+        a = (a + 1) % ayat.length;
     },1500);
 }
 
+changeDuaa();
 changeAyah();
+setInterval(changeDuaa,12000);
 setInterval(changeAyah,10000);
 </script>
 
